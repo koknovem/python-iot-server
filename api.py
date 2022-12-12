@@ -50,7 +50,8 @@ def getHeatmap(paramJson=""):
             "action": "view",
         }
     res = getAPIbyJson(paramJson, "eventsources.cgi")
-    return res.text
+    resJson = [f"\"{x[0]}\":\"{x[1]}\"" for x in res.split("\n")]
+    return resJson
 
 
 def getPeopleCount(paramJson=""):
