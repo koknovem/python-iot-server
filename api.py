@@ -21,6 +21,7 @@ def postRequest(url, json, headers):
 
 def getHeatmap():
     paramJson = {
+        "msubmenu": "heatmap",
         "action": "view",
     }
     url = baseUrl + jsonToRequestUrl(paramJson, "stw-cgi/eventsources.cgi")
