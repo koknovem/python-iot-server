@@ -56,8 +56,7 @@ def getHeatmap(paramJson=""):
     for row in res.text.split("\r\n")[:-1]:
         data = row.split("=")
         resJsonString += f"\"{data[0]}\": \"{data[1]}\","
-    print(resJsonString[:-1])
-    resJson = "{" + resJsonString + "}"
+    resJson = "{" + resJsonString[:-1] + "}"
     resJson = json.loads(resJson)
     return resJson
 
