@@ -25,8 +25,13 @@ def getAPIbyJson(paramJson, basePath):
     return res
 
 def resolveDigestData(json):
-    auths = json['WWW-Authenticate']
-    print(auths)
+    auths = json['WWW-Authenticate'].split(",")
+    for i in range(len(auths)):
+        auths[i] = auths[i].split("=")[1].replace("\"", "")
+    realm=auths[0]
+    nonce=auths[2]
+    qop=auths[3]
+    print(realm, nonce, qop)
 
 def getHeatmap(paramJson=""):
     if(paramJson == ""):
