@@ -24,6 +24,10 @@ def getAPIbyJson(paramJson, basePath):
     res = getRequest(url)
     return res
 
+def resolveDigestData(json):
+    auths = json['WWW-Authenticate']
+    print(auths)
+
 def getHeatmap(paramJson=""):
     if(paramJson == ""):
         paramJson = {
@@ -31,6 +35,7 @@ def getHeatmap(paramJson=""):
             "action": "view",
         }
     res = getAPIbyJson(paramJson, "eventsources.cgi")
+    resolveDigestData(res.headers)
     return res
 
 def getPeopleCount(paramJson=""):
@@ -41,4 +46,5 @@ def getPeopleCount(paramJson=""):
             "channel": 0,
         }
     res = getAPIbyJson(paramJson, "eventsources.cgi")
+    resolveDigestData(res.headers)
     return res
