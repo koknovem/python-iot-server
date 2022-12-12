@@ -1,3 +1,5 @@
+import json
+
 import requests
 from requests.auth import HTTPDigestAuth
 
@@ -50,7 +52,8 @@ def getHeatmap(paramJson=""):
             "action": "view",
         }
     res = getAPIbyJson(paramJson, "eventsources.cgi")
-    resJson = [f"\"{x.split('=')[0]}\":\"{x.split('=')[1]}\"" for x in res.text[:-1].split("\n")]
+    resJson = [f"\"{x.split('=')[0]}\":\"{x.split('=')[1]}\"" for x in res.text[:-1].split("\r\n")]
+    resJson = json.loads(resJson)
     return resJson
 
 
