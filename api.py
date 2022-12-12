@@ -23,6 +23,7 @@ def getHeatmap():
     paramJson = {
         "action": "view",
     }
-    url = baseUrl + jsonToRequestUrl(paramJson, "/stw-cgi/eventsources.cgi")
+    url = baseUrl + jsonToRequestUrl(paramJson, "stw-cgi/eventsources.cgi")
+    print(url)
     res = getRequest(url)
     return res
