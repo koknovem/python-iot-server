@@ -1,6 +1,6 @@
 from api import *
 def main():
-	print(getPeopleCount().text)
+	print(getPeopleCount().headers)
 
 
 if (__name__ == "__main__"):
