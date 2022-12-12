@@ -3,7 +3,7 @@ import requests
 baseUrl = "http://192.168.3.22"
 
 def jsonToRequestUrl(json, fileName):
-	returnValue = f"/{fileName}?"
+	returnValue = f"/stw-cgi/{fileName}?"
 	for item in json:
 		returnValue += item + "=" + json[item] + "&"
 	if returnValue[-1] == "&":
@@ -19,12 +19,26 @@ def getRequest(url):
 def postRequest(url, json, headers):
     return requests.post(url, json=json, headers=headers)
 
-def getHeatmap():
-    paramJson = {
-        "msubmenu": "heatmap",
-        "action": "view",
-    }
-    url = baseUrl + jsonToRequestUrl(paramJson, "stw-cgi/eventsources.cgi")
-    print(url)
+def getAPIbyJson(paramJson, basePath):
+    url = baseUrl + jsonToRequestUrl(paramJson, basePath)
     res = getRequest(url)
+    return res
+
+def getHeatmap(paramJson=""):
+    if(paramJson == ""):
+        paramJson = {
+            "msubmenu": "heatmap",
+            "action": "view",
+        }
+    res = getAPIbyJson(paramJson, "eventsources.cgi")
+    return res
+
+def getPeopleCount(paramJson=""):
+    if(paramJson == ""):
+        paramJson = {
+            "msubmenu": "peoplecount",
+            "action": "view",
+            "channel": 0,
+        }
+    res = getAPIbyJson(paramJson, "eventsources.cgi")
     return res

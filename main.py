@@ -1,6 +1,6 @@
 from api import *
 def main():
-	print(getHeatmap().text)
+	print(getPeopleCount().text)
 
 
 if (__name__ == "__main__"):
