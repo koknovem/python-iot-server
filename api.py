@@ -50,7 +50,7 @@ def getHeatmap(paramJson=""):
             "action": "view",
         }
     res = getAPIbyJson(paramJson, "eventsources.cgi")
-    resJson = [f"\"{x[0]}\":\"{x[1]}\"" for x in res.text[:-1].split("\n")]
+    resJson = [f"\"{x.split('=')[0]}\":\"{x.split('=')[1]}\"" for x in res.text[:-1].split("\n")]
     return resJson
 
 
