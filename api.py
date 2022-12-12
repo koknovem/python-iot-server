@@ -5,7 +5,7 @@ baseUrl = "http://192.168.3.22"
 def jsonToRequestUrl(json, fileName):
 	returnValue = f"/stw-cgi/{fileName}?"
 	for item in json:
-		returnValue += item + "=" + json[item] + "&"
+		returnValue += item + "=" + str(json[item]) + "&"
 	if returnValue[-1] == "&":
 		returnValue = returnValue[:-1]
 	return returnValue
