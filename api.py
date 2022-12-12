@@ -15,6 +15,15 @@ def jsonToRequestUrl(json, fileName):
         returnValue = returnValue[:-1]
     return returnValue
 
+def getJsonFromWeb(webResult):
+    resJsonString = ""
+    for row in webResult.text.split("\r\n")[:-1]:
+        data = row.split("=")
+        resJsonString += f"\"{data[0]}\": \"{data[1]}\","
+    resJson = "{" + resJsonString[:-1] + "}"
+    resJson = json.loads(resJson)
+    return resJson
+
 
 def getRequest(url):
     print(url)
@@ -52,21 +61,5 @@ def getHeatmap(paramJson=""):
             "action": "view",
         }
     res = getAPIbyJson(paramJson, "eventsources.cgi")
-    resJsonString = ""
-    for row in res.text.split("\r\n")[:-1]:
-        data = row.split("=")
-        resJsonString += f"\"{data[0]}\": \"{data[1]}\","
-    resJson = "{" + resJsonString[:-1] + "}"
-    resJson = json.loads(resJson)
+    resJson = getJsonFromWeb(res)
     return resJson
-
-
-def getPeopleCount(paramJson=""):
-    if (paramJson == ""):
-        paramJson = {
-            "msubmenu": "peoplecount",
-            "action": "view",
-            "channel": 0,
-        }
-    res = getAPIbyJson(paramJson, "eventsources.cgi")
-    return res.text
