@@ -15,6 +15,7 @@ def jsonToRequestUrl(json, fileName):
 
 
 def getRequest(url):
+    print(url)
     return requests.get(url, auth=auth)
 
 
