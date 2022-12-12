@@ -2,14 +2,14 @@ import requests
 
 baseUrl = "http://192.168.3.22"
 
-def jsonToRequestUrl(json, fileName):
-	returnValue = f"/stw-cgi/{fileName}?"
-	for item in json:
-		returnValue += item + "=" + str(json[item]) + "&"
-	if returnValue[-1] == "&":
-		returnValue = returnValue[:-1]
-	return returnValue
 
+def jsonToRequestUrl(json, fileName):
+    returnValue = f"/stw-cgi/{fileName}?"
+    for item in json:
+        returnValue += item + "=" + str(json[item]) + "&"
+    if returnValue[-1] == "&":
+        returnValue = returnValue[:-1]
+    return returnValue
 
 
 def getRequest(url):
@@ -19,22 +19,29 @@ def getRequest(url):
 def postRequest(url, json, headers):
     return requests.post(url, json=json, headers=headers)
 
+
 def getAPIbyJson(paramJson, basePath):
     url = baseUrl + jsonToRequestUrl(paramJson, basePath)
     res = getRequest(url)
     return res
 
+
 def resolveDigestData(json):
     auths = json['WWW-Authenticate'].split(",")
     for i in range(len(auths)):
         auths[i] = auths[i].split("=")[1].replace("\"", "")
-    realm=auths[0]
-    nonce=auths[2]
-    qop=auths[3]
-    print(realm, nonce, qop)
+    realm = auths[0]
+    nonce = auths[2]
+    qop = auths[3]
+    return {
+        "realm": realm,
+        "nonce": nonce,
+        "qop": qop
+    }
+
 
 def getHeatmap(paramJson=""):
-    if(paramJson == ""):
+    if (paramJson == ""):
         paramJson = {
             "msubmenu": "heatmap",
             "action": "view",
@@ -43,8 +50,9 @@ def getHeatmap(paramJson=""):
     resolveDigestData(res.headers)
     return res
 
+
 def getPeopleCount(paramJson=""):
-    if(paramJson == ""):
+    if (paramJson == ""):
         paramJson = {
             "msubmenu": "peoplecount",
             "action": "view",
