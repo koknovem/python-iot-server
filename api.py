@@ -1,6 +1,8 @@
 import requests
+from requests.auth import HTTPDigestAuth
 
 baseUrl = "http://192.168.3.22"
+auth = HTTPDigestAuth('admin', 'A@dmin$2017')
 
 
 def jsonToRequestUrl(json, fileName):
@@ -13,7 +15,7 @@ def jsonToRequestUrl(json, fileName):
 
 
 def getRequest(url):
-    return requests.get(url)
+    return requests.get(url, auth=auth)
 
 
 def postRequest(url, json, headers):
@@ -47,8 +49,7 @@ def getHeatmap(paramJson=""):
             "action": "view",
         }
     res = getAPIbyJson(paramJson, "eventsources.cgi")
-    resolveDigestData(res.headers)
-    return res
+    return res.text
 
 
 def getPeopleCount(paramJson=""):
@@ -59,5 +60,4 @@ def getPeopleCount(paramJson=""):
             "channel": 0,
         }
     res = getAPIbyJson(paramJson, "eventsources.cgi")
-    resolveDigestData(res.headers)
-    return res
+    return res.text

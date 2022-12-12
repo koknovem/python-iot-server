@@ -1,6 +1,6 @@
 from api import *
 def main():
-	getPeopleCount()
+	print(getPeopleCount())
 
 
 if (__name__ == "__main__"):
