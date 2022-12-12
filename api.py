@@ -54,6 +54,7 @@ def getHeatmap(paramJson=""):
     res = getAPIbyJson(paramJson, "eventsources.cgi")
     resJsonString = ""
     for row in res.text.split("\r\n"):
+        print(row)
         data = row.split("=")
         resJsonString += f"\"{data[0]}\": \"{data[1]}\","
     print(resJsonString[:-1])
