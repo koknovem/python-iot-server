@@ -144,18 +144,12 @@ def showCameraStream(paramJson=""):
 
 def rtspStream():
     vidCap = cv2.VideoCapture(f"rtsp://admin:A%40dmin%242017@{host}/H.264/media.smp")
-
-    # 建立視窗
     cv2.namedWindow('image_display', cv2.WINDOW_AUTOSIZE)
 
     while True:
-        # 從 RTSP 串流讀取一張影像
         ret, image = vidCap.read()
-
         if ret:
-            # 顯示影像
             cv2.imshow('image_display', image)
             cv2.waitKey(10)
         else:
-            # 若沒有影像跳出迴圈
             break
