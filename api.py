@@ -122,6 +122,7 @@ def showCameraStream(paramJson=""):
                 buffer = b''
                 a = imageByte.find(b'\xff\xd8')
                 b = imageByte.find(b'\xff\xd9')
+                print(a, b)
                 if a != -1 and b != -1:
                     jpg = imageByte[a:b + 2]
                     imageByte = imageByte[b + 2:]
