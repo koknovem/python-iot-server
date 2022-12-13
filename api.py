@@ -1,10 +1,12 @@
 import json
 import urllib.request
+import time
 from urllib.request import urlopen
 import requests
 from requests.auth import HTTPDigestAuth
 import cv2
 import numpy as np
+import io
 
 baseUrl = "http://192.168.3.22"
 auth = HTTPDigestAuth('admin', 'A@dmin$2017')
@@ -109,7 +111,8 @@ def showCameraStream(paramJson=""):
     url = getUrlPath(paramJson, "video.cgi")
     res = getRequest(url, isStream=True)
     while True:
-        print(res.raw)
+        print(io.BytesIO(res.content))
+        time.sleep(0.5)
     # req = urllib.request.Request(url)
     # req.add_header()
     # print(stream)
