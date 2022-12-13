@@ -113,7 +113,7 @@ def showCameraStream(paramJson=""):
     if stream.ok:
         chunk_size = 1024
         for chunk in stream.iter_content(chunk_size=chunk_size):
-            print(io.BytesIO(chunk))
+            print(io.BytesIO(chunk).read())
     # req = urllib.request.Request(url)
     # req.add_header()
     # print(stream)
