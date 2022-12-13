@@ -110,6 +110,7 @@ def showCameraStream(paramJson=""):
         }
     url = getUrlPath(paramJson, "video.cgi")
     res = getRequest(url, isStream=True)
+    print(res.text)
     while True:
         print(res.content)
     # req = urllib.request.Request(url)
