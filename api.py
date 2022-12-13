@@ -151,7 +151,7 @@ def rtspStream():
         if ret:
             jsonHeaders = [name for name in getHeatmap()]
             heatmapJson = getHeatmap()
-            levels = heatmapJson[jsonHeaders[0]]
+            levels = heatmapJson[jsonHeaders[0]].split(",")
             heatmapResolution = [int(x) for x in heatmapJson[jsonHeaders[2]].split("x")]
             print(levels, heatmapResolution)
             levelsNp = np.reshape(levels, heatmapResolution)
