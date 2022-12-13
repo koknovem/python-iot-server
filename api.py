@@ -148,7 +148,7 @@ def showCameraStream(paramJson=""):
                         timeAnchor = [startTime, downloadedAllbufferTime, foundAllPointTime, startParseStringTime, endParseStringTime, endDecodeImageTime]
                         timeAnchor = [timeAnchor[x]-timeAnchor[x-1] for x in range(len(timeAnchor))]
                         timeAnchor[0] = 0
-                        timeAnchor.append(len(imageNumpy))
+                        timeAnchor.append(str(len(imageNumpy)*8) + "b")
                         print(timeAnchor)
                     startTime = time.time()
                     buffer = b''
