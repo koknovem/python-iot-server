@@ -34,12 +34,13 @@ def postRequest(url, json, headers):
     return requests.post(url, json=json, headers=headers)
 
 
-def getAPIbyJson(paramJson, basePath):
+def getAPIbyJson(paramJson, basePath="eventsources.cgi"):
     url = baseUrl + jsonToRequestUrl(paramJson, basePath)
     res = getRequest(url)
     return res
 
 
+#Deprecated: digest auth has been handled by requests.auth
 def resolveDigestData(json):
     auths = json['WWW-Authenticate'].split(",")
     for i in range(len(auths)):
@@ -55,11 +56,28 @@ def resolveDigestData(json):
 
 
 def getHeatmap(paramJson=""):
+    """
+    Not a doc string, check the function name to understand what this does la you
+    """
     if (paramJson == ""):
         paramJson = {
             "msubmenu": "heatmap",
             "action": "view",
         }
-    res = getAPIbyJson(paramJson, "eventsources.cgi")
+    res = getAPIbyJson(paramJson)
     resJson = getJsonFromWeb(res)
     return resJson
+
+def getPeoplecount(paramJson=""):
+    """
+    Not a doc string, check the function name to understand what this does la you
+    """
+    if (paramJson == ""):
+        paramJson = {
+            "msubmenu": "peoplecount",
+            "action": "view",
+        }
+    res = getAPIbyJson(paramJson)
+    resJson = getJsonFromWeb(res)
+    return resJson
+
