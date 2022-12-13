@@ -120,19 +120,14 @@ def showCameraStream(paramJson=""):
             else:
                 print(buffer)
                 print(len(buffer.split(b'--SamsungTechwin')[0]))
+                imageByte = buffer.split(b'--SamsungTechwin')[0]
                 buffer = b''
-    # req = urllib.request.Request(url)
-    # req.add_header()
-    # print(stream)
-    # bytes = ''
-    # while True:
-    #     bytes += stream.read(1024)
-    #     a = bytes.find('\xff\xd8')
-    #     b = bytes.find('\xff\xd9')
-    #     if a != -1 and b != -1:
-    #         jpg = bytes[a:b + 2]
-    #         bytes = bytes[b + 2:]
-    #         i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.CV_LOAD_IMAGE_COLOR)
-    #         cv2.imshow('i', i)
-    #         if cv2.waitKey(1) == 27:
-    #             exit(0)
+                a = imageByte.find('\xff\xd8')
+                b = imageByte.find('\xff\xd9')
+                if a != -1 and b != -1:
+                    jpg = imageByte[a:b + 2]
+                    imageByte = imageByte[b + 2:]
+                    i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.CV_LOAD_IMAGE_COLOR)
+                    cv2.imshow('i', i)
+                    if cv2.waitKey(1) == 27:
+                        exit(0)
