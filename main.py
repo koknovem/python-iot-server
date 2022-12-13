@@ -1,6 +1,6 @@
 from api import *
 def main():
-	print(showCameraStream())
+	rtspStream()
 
 
 if (__name__ == "__main__"):

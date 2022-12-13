@@ -10,7 +10,8 @@ import numpy as np
 import io
 import PIL.Image
 
-baseUrl = "http://192.168.3.22"
+host = "192.168.3.22"
+baseUrl = "http://" + host
 auth = HTTPDigestAuth('admin', 'A@dmin$2017')
 
 
@@ -140,3 +141,21 @@ def showCameraStream(paramJson=""):
                     buffer = b''
     except:
         showCameraStream()
+
+def rtspStream():
+    vidCap = cv2.VideoCapture(f"rtsp://{host}/H264/media.smp")
+
+    # 建立視窗
+    cv2.namedWindow('image_display', cv2.WINDOW_AUTOSIZE)
+
+    while True:
+        # 從 RTSP 串流讀取一張影像
+        ret, image = vidCap.read()
+
+        if ret:
+            # 顯示影像
+            cv2.imshow('image_display', image)
+            cv2.waitKey(10)
+        else:
+            # 若沒有影像跳出迴圈
+            break
