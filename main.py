@@ -1,6 +1,6 @@
 from api import *
 def main():
-	print(getPeoplecount())
+	print(showCameraStream())
 
 
 if (__name__ == "__main__"):
