@@ -28,13 +28,14 @@ def getJsonFromWeb(webResult):
     return resJson
 
 
-def getRequest(url):
-    print(url)
-    return requests.get(url, auth=auth)
+def getRequest(url, isUseAuth=True):
+    if isUseAuth:
+        return requests.get(url, auth=auth)
+    return requests.get(url)
 
 
-def postRequest(url, json, headers):
-    return requests.post(url, json=json, headers=headers)
+def postRequest(url, jsonBody, headers):
+    return requests.post(url, json=jsonBody, headers=headers)
 
 
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi"):
@@ -56,7 +57,7 @@ def resolveDigestData(json):
     return {
         "realm": realm,
         "nonce": nonce,
-        "qop": qop
+        "qop"  : qop
     }
 
 
@@ -101,17 +102,20 @@ def showCameraStream(paramJson=""):
             # "CompressionLevel": "10"
         }
     url = getUrlPath(paramJson, "video.cgi")
-    stream = urllib.request.Request(url)
-    print(stream)
-    bytes = ''
-    while True:
-        bytes += stream.read(1024)
-        a = bytes.find('\xff\xd8')
-        b = bytes.find('\xff\xd9')
-        if a != -1 and b != -1:
-            jpg = bytes[a:b + 2]
-            bytes = bytes[b + 2:]
-            i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.CV_LOAD_IMAGE_COLOR)
-            cv2.imshow('i', i)
-            if cv2.waitKey(1) == 27:
-                exit(0)
+    authDetail = getRequest(url, False)
+    print(authDetail.headers)
+    # req = urllib.request.Request(url)
+    # req.add_header()
+    # print(stream)
+    # bytes = ''
+    # while True:
+    #     bytes += stream.read(1024)
+    #     a = bytes.find('\xff\xd8')
+    #     b = bytes.find('\xff\xd9')
+    #     if a != -1 and b != -1:
+    #         jpg = bytes[a:b + 2]
+    #         bytes = bytes[b + 2:]
+    #         i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.CV_LOAD_IMAGE_COLOR)
+    #         cv2.imshow('i', i)
+    #         if cv2.waitKey(1) == 27:
+    #             exit(0)
