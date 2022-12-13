@@ -118,13 +118,13 @@ def showCameraStream(paramJson=""):
             if(boundary not in buffer):
                 buffer += chunk
             else:
-                print(buffer)
-                print(len(buffer.split(b'\r\n\r\n')[0]))
+                # print(buffer)
+                # print(len(buffer.split(b'\r\n\r\n')[0]))
                 imageByte = buffer
                 # imageByte = buffer.split(b'--SamsungTechwin')[0]
                 a = imageByte.find(b'\xff\xd8')
                 b = imageByte.find(b'\xff\xd9')
-                print(a, b)
+                # print(a, b)
                 if a != -1 and b != -1:
                     jpg = imageByte[a:b + 2]
                     imageByte = imageByte[b + 2:]
