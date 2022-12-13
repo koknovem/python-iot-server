@@ -122,8 +122,8 @@ def showCameraStream(paramJson=""):
                 print(len(buffer.split(b'--SamsungTechwin')[0]))
                 imageByte = buffer.split(b'--SamsungTechwin')[0]
                 buffer = b''
-                a = imageByte.find('\xff\xd8')
-                b = imageByte.find('\xff\xd9')
+                a = imageByte.find(b'\xff\xd8')
+                b = imageByte.find(b'\xff\xd9')
                 if a != -1 and b != -1:
                     jpg = imageByte[a:b + 2]
                     imageByte = imageByte[b + 2:]
