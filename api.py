@@ -82,7 +82,7 @@ def getHeatmap(paramJson=""):
     if (paramJson == ""):
         paramJson = {
             "msubmenu": "heatmap",
-            "action": "view",
+            "action": "check",
         }
     res = getAPIbyJson(paramJson)
     resJson = getJsonFromWeb(res)
@@ -149,7 +149,7 @@ def rtspStream():
     while True:
         ret, image = vidCap.read()
         if ret:
-            print(image)
+            print(getHeatmap())
             cv2.imshow('image_display', image)
             cv2.waitKey(10)
         else:
