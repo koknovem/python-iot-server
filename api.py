@@ -136,6 +136,7 @@ def showCameraStream(paramJson=""):
                         cv2.imshow('i', i)
                         if cv2.waitKey(1) == 27:
                             exit(0)
+                        print(len(imageNumpy))
                     buffer = b''
     except:
         showCameraStream()
