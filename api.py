@@ -111,25 +111,28 @@ def showCameraStream(paramJson=""):
         }
     url = getUrlPath(paramJson, "video.cgi")
     stream = requests.get(url, stream=True, auth=auth)
-    if stream.ok:
-        boundary = b'--SamsungTechwin'
-        buffer = b''
-        for chunk in stream.iter_content():
-            if(boundary not in buffer):
-                buffer += chunk
-            else:
-                # print(buffer)
-                # print(len(buffer.split(b'\r\n\r\n')[0]))
-                imageByte = buffer
-                # imageByte = buffer.split(b'--SamsungTechwin')[0]
-                a = imageByte.find(b'\xff\xd8')
-                b = imageByte.find(b'\xff\xd9')
-                # print(a, b)
-                if a != -1 and b != -1:
-                    jpg = imageByte[a:b + 2]
-                    imageByte = imageByte[b + 2:]
-                    i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
-                    cv2.imshow('i', i)
-                    if cv2.waitKey(1) == 27:
-                        exit(0)
-                buffer = b''
+    try:
+        if stream.ok:
+            boundary = b'--SamsungTechwin'
+            buffer = b''
+            for chunk in stream.iter_content():
+                if(boundary not in buffer):
+                    buffer += chunk
+                else:
+                    # print(buffer)
+                    # print(len(buffer.split(b'\r\n\r\n')[0]))
+                    imageByte = buffer
+                    # imageByte = buffer.split(b'--SamsungTechwin')[0]
+                    a = imageByte.find(b'\xff\xd8')
+                    b = imageByte.find(b'\xff\xd9')
+                    # print(a, b)
+                    if a != -1 and b != -1:
+                        jpg = imageByte[a:b + 2]
+                        imageByte = imageByte[b + 2:]
+                        i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                        cv2.imshow('i', i)
+                        if cv2.waitKey(1) == 27:
+                            exit(0)
+                    buffer = b''
+    except:
+        showCameraStream()
