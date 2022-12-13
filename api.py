@@ -100,5 +100,6 @@ def showCameraStream(paramJson=""):
             "CompressionLevel": "10"
         }
     url = getUrlPath(paramJson, "video.cgi")
-    digestHeader = getRequest(url).headers
-    print(digestHeader)
+    res = getRequest(url)
+    print(res.text)
+    return res.headers
