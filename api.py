@@ -146,7 +146,7 @@ def showCameraStream(paramJson=""):
                         if cv2.waitKey(1) == 27:
                             exit(0)
                         timeAnchor = [startTime, downloadedAllbufferTime, foundAllPointTime, startParseStringTime, endParseStringTime, endDecodeImageTime]
-                        print([x for x in timeAnchor].append(len(imageNumpy)))
+                        print([x for x in timeAnchor])
                     buffer = b''
     except:
         showCameraStream()
