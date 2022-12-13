@@ -1,9 +1,8 @@
 import json
-
+from urllib.request import urlopen
 import requests
 from requests.auth import HTTPDigestAuth
 import cv2
-import urllib
 import numpy as np
 
 baseUrl = "http://192.168.3.22"
@@ -101,7 +100,7 @@ def showCameraStream(paramJson=""):
             "CompressionLevel": "10"
         }
     url = getUrlPath(paramJson, "video.cgi")
-    stream = urllib.urlopen(url)
+    stream = urlopen(url)
     bytes = ''
     while True:
         bytes += stream.read(1024)
