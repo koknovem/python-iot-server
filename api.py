@@ -1,4 +1,5 @@
 import json
+import urllib.request
 from urllib.request import urlopen
 import requests
 from requests.auth import HTTPDigestAuth
@@ -100,7 +101,7 @@ def showCameraStream(paramJson=""):
             # "CompressionLevel": "10"
         }
     url = getUrlPath(paramJson, "video.cgi")
-    stream = urlopen(url)
+    stream = urllib.Request(url)
     bytes = ''
     while True:
         bytes += stream.read(1024)
