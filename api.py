@@ -117,7 +117,8 @@ def showCameraStream(paramJson=""):
         }
     url = getUrlPath(paramJson, "video.cgi")
     stream = requests.get(url, stream=True, auth=auth)
-    startTime = time.time()
+    startFrameTime = time.time()
+    totalByte, startTime = [0, time.time()]
     try:
         if stream.ok:
             boundary = b'--SamsungTechwin'
@@ -145,12 +146,14 @@ def showCameraStream(paramJson=""):
                         cv2.imshow('i', i)
                         if cv2.waitKey(1) == 27:
                             exit(0)
-                        timeAnchor = [startTime, downloadedAllbufferTime, foundAllPointTime, startParseStringTime, endParseStringTime, endDecodeImageTime]
+                        timeAnchor = [startFrameTime, downloadedAllbufferTime, foundAllPointTime, startParseStringTime, endParseStringTime, endDecodeImageTime]
                         timeAnchor = [timeAnchor[x]-timeAnchor[x-1] for x in range(len(timeAnchor))]
                         timeAnchor[0] = 0
                         timeAnchor.append(str(len(imageNumpy)*8) + "b")
+                        totalByte+= len(imageNumpy)
+                        timeAnchor.append(str(totalByte/(time.time()-startTime)) + "bps")
                         print(timeAnchor)
-                    startTime = time.time()
+                    startFrameTime = time.time()
                     buffer = b''
     except:
         showCameraStream()
