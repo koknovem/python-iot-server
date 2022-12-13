@@ -119,7 +119,7 @@ def showCameraStream(paramJson=""):
                 buffer += chunk
             else:
                 print(buffer)
-                print(len(buffer.split("\r\n")[0]))
+                print(len(buffer.split(b"\r\n")[0]))
                 buffer = b''
     # req = urllib.request.Request(url)
     # req.add_header()
