@@ -153,6 +153,7 @@ def rtspStream():
             heatmapJson = getHeatmap()
             levels = heatmapJson[jsonHeaders[0]]
             heatmapResolution = heatmapJson[jsonHeaders[2]].split("x")
+            print(levels, heatmapResolution)
             levelsNp = np.reshape(levels, heatmapResolution)
             img = cv2.applyColorMap(levelsNp, cv2.COLORMAP_JET)
             cv2.imshow('image_display', img)
