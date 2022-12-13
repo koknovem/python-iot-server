@@ -118,8 +118,6 @@ def showCameraStream(paramJson=""):
             if(boundary not in buffer):
                 buffer += chunk
             else:
-                print(buffer)
-                print(len(buffer.split(b'--SamsungTechwin')[0]))
                 imageByte = buffer.split(b'--SamsungTechwin')[0]
                 buffer = b''
                 a = imageByte.find(b'\xff\xd8')
