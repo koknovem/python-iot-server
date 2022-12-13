@@ -21,6 +21,7 @@ def getUriFromJson(json, fileName):
         returnValue = returnValue[:-1]
     return returnValue
 
+
 def getJsonFromWeb(webResult):
     resJsonString = ""
     for row in webResult.text.split("\r\n")[:-1]:
@@ -46,15 +47,18 @@ def getDigestAuthHeaderContent():
 
     return authContent
 
+
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi"):
     url = baseUrl + getUriFromJson(paramJson, cgiFilename)
     res = getRequest(url)
     return res
 
+
 def getUrlPath(paramJson, cgiFilename):
     return baseUrl + getUriFromJson(paramJson, cgiFilename)
 
-#Deprecated: digest auth has been handled by requests.auth
+
+# Deprecated: digest auth has been handled by requests.auth
 def resolveDigestData(json):
     auths = json['WWW-Authenticate'].split(",")
     for i in range(len(auths)):
@@ -65,7 +69,7 @@ def resolveDigestData(json):
     return {
         "realm": realm,
         "nonce": nonce,
-        "qop"  : qop
+        "qop": qop
     }
 
 
@@ -82,6 +86,7 @@ def getHeatmap(paramJson=""):
     resJson = getJsonFromWeb(res)
     return resJson
 
+
 def getPeoplecount(paramJson=""):
     """
     Not a doc string, check the function name to understand what this does la you
@@ -94,6 +99,7 @@ def getPeoplecount(paramJson=""):
     res = getAPIbyJson(paramJson)
     resJson = getJsonFromWeb(res)
     return resJson
+
 
 def showCameraStream(paramJson=""):
     """
@@ -116,7 +122,7 @@ def showCameraStream(paramJson=""):
             boundary = b'--SamsungTechwin'
             buffer = b''
             for chunk in stream.iter_content():
-                if(boundary not in buffer):
+                if boundary not in buffer:
                     buffer += chunk
                 else:
                     # print(buffer)
@@ -129,7 +135,9 @@ def showCameraStream(paramJson=""):
                     if a != -1 and b != -1:
                         jpg = imageByte[a:b + 2]
                         imageByte = imageByte[b + 2:]
-                        i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                        imageNumpy = np.fromstring(jpg, dtype=np.uint8)
+                        i = cv2.imdecode(imageNumpy, cv2.IMREAD_COLOR)
+                        print(imageNumpy)
                         cv2.imshow('i', i)
                         if cv2.waitKey(1) == 27:
                             exit(0)
