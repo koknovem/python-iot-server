@@ -143,7 +143,7 @@ def showCameraStream(paramJson=""):
         showCameraStream()
 
 def rtspStream():
-    vidCap = cv2.VideoCapture(f"rtsp://{host}/H.264/media.smp")
+    vidCap = cv2.VideoCapture(f"rtsp://admin:A%40dmin%242017@{host}/H.264/media.smp")
 
     # 建立視窗
     cv2.namedWindow('image_display', cv2.WINDOW_AUTOSIZE)
