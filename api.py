@@ -105,8 +105,8 @@ def showCameraStream(paramJson=""):
             "action": "view",
             # "Profile": "1",
             "CodecType": "MJPEG",
-            # "Resolution": "800x450",
-            # "FrameRate": "15",
+            "Resolution": "800x450",
+            "FrameRate": "15",
             # "CompressionLevel": "10"
         }
     url = getUrlPath(paramJson, "video.cgi")
