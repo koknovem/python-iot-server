@@ -10,7 +10,7 @@ baseUrl = "http://192.168.3.22"
 auth = HTTPDigestAuth('admin', 'A@dmin$2017')
 
 
-def jsonToRequestUrl(json, fileName):
+def getUriFromJson(json, fileName):
     returnValue = f"/stw-cgi/{fileName}?"
     for item in json:
         returnValue += item + "=" + str(json[item]) + "&"
@@ -28,9 +28,9 @@ def getJsonFromWeb(webResult):
     return resJson
 
 
-def getRequest(url, isUseAuth=True):
+def getRequest(url, isUseAuth=True, isStream=False):
     if isUseAuth:
-        return requests.get(url, auth=auth)
+        return requests.get(url, auth=auth, stream=isStream)
     return requests.get(url)
 
 
@@ -38,13 +38,18 @@ def postRequest(url, jsonBody, headers):
     return requests.post(url, json=jsonBody, headers=headers)
 
 
+def getDigestAuthHeaderContent():
+    authContent = ""
+
+    return authContent
+
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi"):
-    url = baseUrl + jsonToRequestUrl(paramJson, cgiFilename)
+    url = baseUrl + getUriFromJson(paramJson, cgiFilename)
     res = getRequest(url)
     return res
 
 def getUrlPath(paramJson, cgiFilename):
-    return baseUrl + jsonToRequestUrl(paramJson, cgiFilename)
+    return baseUrl + getUriFromJson(paramJson, cgiFilename)
 
 #Deprecated: digest auth has been handled by requests.auth
 def resolveDigestData(json):
@@ -102,8 +107,8 @@ def showCameraStream(paramJson=""):
             # "CompressionLevel": "10"
         }
     url = getUrlPath(paramJson, "video.cgi")
-    authDetail = getRequest(url, False)
-    print(resolveDigestData(authDetail.headers))
+    res = getRequest(url, isStream=True)
+    print(res.raw)
     # req = urllib.request.Request(url)
     # req.add_header()
     # print(stream)
