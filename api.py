@@ -114,6 +114,7 @@ def showCameraStream(paramJson=""):
     if stream.ok:
         chunk_size = 102400
         for chunk in stream.iter_content(chunk_size=chunk_size):
+            print(chunk)
             image = PIL.Image.open(io.BytesIO(chunk))
             image.save("./test.jpeg")
     # req = urllib.request.Request(url)
