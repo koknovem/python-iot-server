@@ -104,8 +104,8 @@ def showCameraStream(paramJson=""):
             "msubmenu": "stream",
             "action": "view",
             # "Profile": "1",
-            "CodecType": "MJPEG",
-            "Resolution": "800x450",
+            "CodecType": "H.265",
+            # "Resolution": "300x300",
             "FrameRate": "5",
             # "CompressionLevel": "10"
         }
