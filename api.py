@@ -120,7 +120,6 @@ def showCameraStream(paramJson=""):
             else:
                 print(buffer)
                 print(len(buffer.split(b'\r\n\r\n')[0]))
-                print(a, b)
                 imageByte = buffer
                 # imageByte = buffer.split(b'--SamsungTechwin')[0]
                 a = imageByte.find(b'\xff\xd8')
