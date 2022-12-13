@@ -112,7 +112,7 @@ def showCameraStream(paramJson=""):
     url = getUrlPath(paramJson, "video.cgi")
     stream = requests.get(url, stream=True, auth=auth)
     if stream.ok:
-        chunk_size = 1024
+        chunk_size = 102400
         for chunk in stream.iter_content(chunk_size=chunk_size):
             image = PIL.Image.open(io.BytesIO(chunk))
             image.save("./test.jpeg")
