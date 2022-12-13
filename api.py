@@ -128,7 +128,7 @@ def showCameraStream(paramJson=""):
                 if a != -1 and b != -1:
                     jpg = imageByte[a:b + 2]
                     imageByte = imageByte[b + 2:]
-                    i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.CV_LOAD_IMAGE_COLOR)
+                    i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
                     cv2.imshow('i', i)
                     if cv2.waitKey(1) == 27:
                         exit(0)
