@@ -112,9 +112,14 @@ def showCameraStream(paramJson=""):
     url = getUrlPath(paramJson, "video.cgi")
     stream = requests.get(url, stream=True, auth=auth)
     if stream.ok:
-        chunk_size = 10240
+        boundary = "\r\n"
+        buffer = b''
         for chunk in stream.iter_content():
-            print(str(chunk))
+            if(boundary not in buffer):
+                buffer += chunk
+            else:
+                print(buffer)
+                buffer = b''
     # req = urllib.request.Request(url)
     # req.add_header()
     # print(stream)
