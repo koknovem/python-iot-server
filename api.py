@@ -2,6 +2,9 @@ import json
 
 import requests
 from requests.auth import HTTPDigestAuth
+import cv2
+import urllib
+import numpy as np
 
 baseUrl = "http://192.168.3.22"
 auth = HTTPDigestAuth('admin', 'A@dmin$2017')
@@ -34,11 +37,13 @@ def postRequest(url, json, headers):
     return requests.post(url, json=json, headers=headers)
 
 
-def getAPIbyJson(paramJson, basePath="eventsources.cgi"):
-    url = baseUrl + jsonToRequestUrl(paramJson, basePath)
+def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi"):
+    url = baseUrl + jsonToRequestUrl(paramJson, cgiFilename)
     res = getRequest(url)
     return res
 
+def getUrlPath(paramJson, cgiFilename):
+    return baseUrl + jsonToRequestUrl(paramJson, cgiFilename)
 
 #Deprecated: digest auth has been handled by requests.auth
 def resolveDigestData(json):
@@ -81,3 +86,31 @@ def getPeoplecount(paramJson=""):
     resJson = getJsonFromWeb(res)
     return resJson
 
+def showCameraStream(paramJson=""):
+    """
+    Not a doc string, check the function name to understand what this does la you
+    """
+    if (paramJson == ""):
+        paramJson = {
+            "msubmenu": "stream",
+            "action": "view",
+            "Profile": "1",
+            "CodecType": "MJPEG",
+            "Resolution": "800x450",
+            "FrameRate": "15",
+            "CompressionLevel": "10"
+        }
+    url = getUrlPath(paramJson, "video.cgi")
+    stream = urllib.urlopen(url)
+    bytes = ''
+    while True:
+        bytes += stream.read(1024)
+        a = bytes.find('\xff\xd8')
+        b = bytes.find('\xff\xd9')
+        if a != -1 and b != -1:
+            jpg = bytes[a:b + 2]
+            bytes = bytes[b + 2:]
+            i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.CV_LOAD_IMAGE_COLOR)
+            cv2.imshow('i', i)
+            if cv2.waitKey(1) == 27:
+                exit(0)
