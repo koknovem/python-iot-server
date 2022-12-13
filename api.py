@@ -112,14 +112,14 @@ def showCameraStream(paramJson=""):
     url = getUrlPath(paramJson, "video.cgi")
     stream = requests.get(url, stream=True, auth=auth)
     if stream.ok:
-        boundary = b'\r\n\r\n'
+        boundary = b'--SamsungTechwin'
         buffer = b''
         for chunk in stream.iter_content():
             if(boundary not in buffer):
                 buffer += chunk
             else:
                 print(buffer)
-                print(len(buffer.split(b"\r\n")[0]))
+                print(len(buffer.split(boundary)[0]))
                 buffer = b''
     # req = urllib.request.Request(url)
     # req.add_header()
