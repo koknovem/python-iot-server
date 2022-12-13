@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return getPeoplecount()
+    return showCameraStream()
 
 @app.route("/peoplecount")
 def peoplecount():
