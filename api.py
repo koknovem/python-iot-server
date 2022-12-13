@@ -7,6 +7,7 @@ from requests.auth import HTTPDigestAuth
 import cv2
 import numpy as np
 import io
+from PIL.Image import Image
 
 baseUrl = "http://192.168.3.22"
 auth = HTTPDigestAuth('admin', 'A@dmin$2017')
@@ -113,7 +114,8 @@ def showCameraStream(paramJson=""):
     if stream.ok:
         chunk_size = 4096
         for chunk in stream.iter_content(chunk_size=chunk_size):
-            print(io.BytesIO(chunk).readlines())
+            image = Image.open(io.BytesIO(chunk))
+            image.save("./test.jpeg")
     # req = urllib.request.Request(url)
     # req.add_header()
     # print(stream)
