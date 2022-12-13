@@ -118,8 +118,6 @@ def showCameraStream(paramJson=""):
         }
     url = getUrlPath(paramJson, "video.cgi")
     stream = requests.get(url, stream=True, auth=auth)
-    startFrameTime = time.time()
-    totalByte, startTime = [0, time.time()]
     try:
         if stream.ok:
             boundary = b'--SamsungTechwin'
@@ -128,33 +126,16 @@ def showCameraStream(paramJson=""):
                 if boundary not in buffer:
                     buffer += chunk
                 else:
-                    downloadedAllbufferTime = time.time()
-                    # print(buffer)
-                    # print(len(buffer.split(b'\r\n\r\n')[0]))
                     imageByte = buffer
-                    # imageByte = buffer.split(b'--SamsungTechwin')[0]
                     a = imageByte.find(b'\xff\xd8')
                     b = imageByte.find(b'\xff\xd9')
-                    foundAllPointTime = time.time()
-                    # print(a, b)
                     if a != -1 and b != -1:
                         jpg = imageByte[a:b + 2]
-                        startParseStringTime = time.time()
                         imageNumpy = np.fromstring(jpg, dtype=np.uint8)
-                        endParseStringTime = time.time()
                         i = cv2.imdecode(imageNumpy, cv2.IMREAD_COLOR)
-                        endDecodeImageTime = time.time()
                         cv2.imshow('i', i)
                         if cv2.waitKey(1) == 27:
                             exit(0)
-                        timeAnchor = [startFrameTime, downloadedAllbufferTime, foundAllPointTime, startParseStringTime, endParseStringTime, endDecodeImageTime]
-                        timeAnchor = [floor(timeAnchor[x]-timeAnchor[x-1], 2) for x in range(len(timeAnchor))]
-                        timeAnchor[0] = 0
-                        timeAnchor.append(str(len(imageNumpy)*8) + "b")
-                        totalByte += len(imageNumpy)
-                        timeAnchor.append(str(floor(totalByte/(time.time()-startTime), 2)) + "bps")
-                        print(timeAnchor)
-                    startFrameTime = time.time()
                     buffer = b''
     except:
         showCameraStream()
