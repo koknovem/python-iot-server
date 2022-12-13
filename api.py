@@ -122,25 +122,31 @@ def showCameraStream(paramJson=""):
             boundary = b'--SamsungTechwin'
             buffer = b''
             for chunk in stream.iter_content():
+                startTime = time.time()
                 if boundary not in buffer:
                     buffer += chunk
                 else:
+                    downloadedAllbufferTime = time.time()
                     # print(buffer)
                     # print(len(buffer.split(b'\r\n\r\n')[0]))
                     imageByte = buffer
                     # imageByte = buffer.split(b'--SamsungTechwin')[0]
                     a = imageByte.find(b'\xff\xd8')
                     b = imageByte.find(b'\xff\xd9')
+                    foundAllPointTime = time.time()
                     # print(a, b)
                     if a != -1 and b != -1:
                         jpg = imageByte[a:b + 2]
-                        imageByte = imageByte[b + 2:]
+                        startParseStringTime = time.time()
                         imageNumpy = np.fromstring(jpg, dtype=np.uint8)
+                        endParseStringTime = time.time()
                         i = cv2.imdecode(imageNumpy, cv2.IMREAD_COLOR)
-                        print(len(imageNumpy))
+                        endDecodeImageTime = time.time()
                         cv2.imshow('i', i)
                         if cv2.waitKey(1) == 27:
                             exit(0)
+                        timeAnchor = [startTime, downloadedAllbufferTime, foundAllPointTime, startParseStringTime, endParseStringTime, endDecodeImageTime]
+                        print([x for x in timeAnchor].append(len(imageNumpy)))
                     buffer = b''
     except:
         showCameraStream()
