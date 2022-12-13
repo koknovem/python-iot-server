@@ -118,8 +118,8 @@ def showCameraStream(paramJson=""):
             if(boundary not in buffer):
                 buffer += chunk
             else:
-                imageByte = buffer.split(b'--SamsungTechwin')[0]
-                buffer = b''
+                imageByte = buffer
+                # imageByte = buffer.split(b'--SamsungTechwin')[0]
                 a = imageByte.find(b'\xff\xd8')
                 b = imageByte.find(b'\xff\xd9')
                 print(a, b)
@@ -130,3 +130,4 @@ def showCameraStream(paramJson=""):
                     cv2.imshow('i', i)
                     if cv2.waitKey(1) == 27:
                         exit(0)
+                buffer = b''
