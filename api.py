@@ -150,7 +150,7 @@ def rtspStream():
         ret, image = vidCap.read()
         if ret:
             print(getHeatmap())
-            cv2.imshow('image_display', image)
-            cv2.waitKey(10)
+            # cv2.imshow('image_display', image)
+            # cv2.waitKey(10)
         else:
             break
