@@ -149,7 +149,9 @@ def rtspStream():
     while True:
         ret, image = vidCap.read()
         if ret:
-            print([name for name in getHeatmap()])
+            jsonHeaders = [name for name in getHeatmap()]
+            img = cv2.applyColorMap(getHeatmap()[jsonHeaders[0]], cv2.COLORMAP_JET)
+            cv2.imshow('image_display', img)
             # cv2.imshow('image_display', image)
             # cv2.waitKey(10)
         else:
