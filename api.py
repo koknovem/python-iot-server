@@ -117,12 +117,12 @@ def showCameraStream(paramJson=""):
         }
     url = getUrlPath(paramJson, "video.cgi")
     stream = requests.get(url, stream=True, auth=auth)
+    startTime = time.time()
     try:
         if stream.ok:
             boundary = b'--SamsungTechwin'
             buffer = b''
             for chunk in stream.iter_content():
-                startTime = time.time()
                 if boundary not in buffer:
                     buffer += chunk
                 else:
@@ -147,6 +147,7 @@ def showCameraStream(paramJson=""):
                             exit(0)
                         timeAnchor = [startTime, downloadedAllbufferTime, foundAllPointTime, startParseStringTime, endParseStringTime, endDecodeImageTime]
                         print([timeAnchor[x]-timeAnchor[x-1] for x in range(len(timeAnchor))])
+                    startTime = time.time()
                     buffer = b''
     except:
         showCameraStream()
