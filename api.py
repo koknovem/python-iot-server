@@ -1,6 +1,7 @@
 import json
 import urllib.request
 import time
+from math import floor
 from urllib.request import urlopen
 import requests
 from requests.auth import HTTPDigestAuth
@@ -147,11 +148,11 @@ def showCameraStream(paramJson=""):
                         if cv2.waitKey(1) == 27:
                             exit(0)
                         timeAnchor = [startFrameTime, downloadedAllbufferTime, foundAllPointTime, startParseStringTime, endParseStringTime, endDecodeImageTime]
-                        timeAnchor = [timeAnchor[x]-timeAnchor[x-1] for x in range(len(timeAnchor))]
+                        timeAnchor = [floor(timeAnchor[x]-timeAnchor[x-1], 2) for x in range(len(timeAnchor))]
                         timeAnchor[0] = 0
                         timeAnchor.append(str(len(imageNumpy)*8) + "b")
-                        totalByte+= len(imageNumpy)
-                        timeAnchor.append(str(totalByte/(time.time()-startTime)) + "bps")
+                        totalByte += len(imageNumpy)
+                        timeAnchor.append(str(floor(totalByte/(time.time()-startTime), 2)) + "bps")
                         print(timeAnchor)
                     startFrameTime = time.time()
                     buffer = b''
