@@ -109,10 +109,11 @@ def showCameraStream(paramJson=""):
             # "CompressionLevel": "10"
         }
     url = getUrlPath(paramJson, "video.cgi")
-    res = getRequest(url, isStream=True)
-    print(res.text)
-    while True:
-        print(res.content)
+    stream = requests.get(url, stream=True, auth=auth)
+    if stream.ok:
+        chunk_size = 1024
+        for chunk in stream.iter_content(chunk_size=chunk_size):
+            print(chunk)
     # req = urllib.request.Request(url)
     # req.add_header()
     # print(stream)
