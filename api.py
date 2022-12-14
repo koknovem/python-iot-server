@@ -93,6 +93,7 @@ def getHeatmapNumpy(paramJson={}):
 
 def getHeatmapHeatmapImage():
     heatmapNumpy, heatmapResolution = getHeatmapNumpy()
+    heatmapNumpy = [linearMapper(x, 0, 9999, 0, 255) for x in heatmapNumpy]
     heatmapImage = cv2.applyColorMap(heatmapNumpy, cv2.COLORMAP_JET)
     return heatmapImage, heatmapResolution
 
@@ -187,3 +188,14 @@ def rtspStream():
             cv2.waitKey(10)
         else:
             break
+
+def linearMapper(value, leftMin, leftMax, rightMin, rightMax):
+    # Figure out how 'wide' each range is
+    leftSpan = leftMax - leftMin
+    rightSpan = rightMax - rightMin
+
+    # Convert the left range into a 0-1 range (float)
+    valueScaled = float(value - leftMin) / float(leftSpan)
+
+    # Convert the 0-1 range into a value in the right range.
+    return rightMin + (valueScaled * rightSpan)
