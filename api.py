@@ -68,8 +68,8 @@ def getHeatmapNumpy(paramJson={}):
     resJson = resJson[headers[0]][0]
     jsonHeaders = [name for name in resJson]
     print(resJson, jsonHeaders)
-    levels = resJson[jsonHeaders[0]]
-    heatmapResolution = resJson[jsonHeaders[2]].split("x")
+    levels = resJson[jsonHeaders[1]]
+    heatmapResolution = resJson[jsonHeaders[3]].split("x")
     levelsNp = np.reshape(levels, heatmapResolution).astype(np.uint8)
     return levelsNp
 
