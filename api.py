@@ -47,7 +47,7 @@ def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi", isAcceptJson=True):
     if(isAcceptJson):
         resJson = json.loads(getRequest(url).text)
     else:
-        res = getRequest(url, isAcceptJson=isAcceptJson).text
+        res = getRequest(url, isAcceptJson=isAcceptJson)
         resJson = getJsonFromWeb(res)
     jsonHeader = [header for header in resJson]
     return [resJson, jsonHeader]
