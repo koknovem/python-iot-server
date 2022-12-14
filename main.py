@@ -8,7 +8,7 @@ import cv2
 def main():
     while True:
         heatmapImage = getHeatmapHeatmapImage()
-        heatmapImage = cv2.resize(heatmapImage,(120,120) ,interpolation=cv2.INTER_CUBIC)
+        # heatmapImage = cv2.resize(heatmapImage,(,) ,interpolation=cv2.INTER_CUBIC)
         cv2.imshow("heatmap", heatmapImage)
         cv2.waitKey(30)
 
