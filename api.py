@@ -34,7 +34,12 @@ def postRequest(url, jsonBody, headers):
 
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi", isAcceptJson=True):
     url = getUrlPath(paramJson, cgiFilename)
-    resJson = json.loads(getRequest(url, isAcceptJson=isAcceptJson).text)
+    resJson = {}
+    if(isAcceptJson):
+        resJson = json.loads(getRequest(url).text)
+    else:
+        res = getRequest(url, isAcceptJson=isAcceptJson).text
+        resJson = getWEB????
     jsonHeader = [header for header in resJson]
     return [resJson, jsonHeader]
 
