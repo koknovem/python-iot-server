@@ -117,7 +117,19 @@ def getObjectDetectFromImage(paramJson={}):
         }
     url = getUrlPath(paramJson, "ai.cgi")
     res = getRequest(url)
-    print(url)
+    return res
+
+def getThermalDetection(paramJson={}):
+    """
+    Not a doc string, check the function name to understand what this does la you
+    """
+    if (paramJson == {}):
+        paramJson = {
+            "msubmenu": "thermaldetectionmode",
+            "action": "view",
+        }
+    url = getUrlPath(paramJson, "eventsources.cgi")
+    res = getRequest(url)
     return res
 
 
