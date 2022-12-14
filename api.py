@@ -19,9 +19,12 @@ def getUriFromJson(paramJson, uri):
     return returnValue
 
 
-def getRequest(url, isUseAuth=True, isStream=False):
+def getRequest(url, isUseAuth=True, isStream=False, isAcceptJson=True):
+    header = {"Accept": "application/json"}
+    if(isAcceptJson == False):
+        header = {}
     if isUseAuth:
-        return requests.get(url, auth=auth, stream=isStream, headers={"Accept": "application/json"})
+        return requests.get(url, auth=auth, stream=isStream, headers=header)
     return requests.get(url)
 
 
@@ -29,9 +32,9 @@ def postRequest(url, jsonBody, headers):
     return requests.post(url, json=jsonBody, headers=headers)
 
 
-def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi"):
+def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi", isAcceptJson=True):
     url = getUrlPath(paramJson, cgiFilename)
-    resJson = json.loads(getRequest(url).text)
+    resJson = json.loads(getRequest(url, isAcceptJson=isAcceptJson).text)
     jsonHeader = [header for header in resJson]
     return [resJson, jsonHeader]
 
@@ -86,7 +89,7 @@ def getPeoplecount(paramJson={}):
             "msubmenu": "peoplecount",
             "action": "view",
         }
-    resJson, headers = getAPIbyJson(paramJson)
+    resJson, headers = getAPIbyJson(paramJson, isAcceptJson=False)
     # resJson = getJsonFromWeb(res)
     return resJson
 
