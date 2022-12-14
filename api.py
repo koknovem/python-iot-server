@@ -87,13 +87,13 @@ def getHeatmapNumpy(paramJson={}):
     resJson = resJson[headers[0]][0]
     jsonHeaders = [name for name in resJson]
     levels = resJson[jsonHeaders[1]]
+    levels = [linearMapper(x, 0, 9999, 0, 255) for x in levels]
     heatmapResolution = [int(x) for x in resJson[jsonHeaders[3]].split("x")]
     levelsNp = np.reshape(levels, heatmapResolution).astype(np.uint8)
     return [levelsNp, heatmapResolution]
 
 def getHeatmapHeatmapImage():
     heatmapNumpy, heatmapResolution = getHeatmapNumpy()
-    heatmapNumpy = [linearMapper(x, 0, 9999, 0, 255) for x in heatmapNumpy]
     heatmapImage = cv2.applyColorMap(heatmapNumpy, cv2.COLORMAP_JET)
     return heatmapImage, heatmapResolution
 
