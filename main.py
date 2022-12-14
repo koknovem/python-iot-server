@@ -13,6 +13,7 @@ def main():
             print(row)
         grayImage = cv2.cvtColor(heatmapNumpy, cv2.COLOR_GRAY2BGR)
         cv2.imshow("heatmap", grayImage)
+        cv2.waitKey(30)
         time.sleep(1)
 
 
