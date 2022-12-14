@@ -10,23 +10,13 @@ baseUrl = "http://" + host
 auth = HTTPDigestAuth('admin', 'A@dmin$2017')
 
 
-def getUriFromJson(json, fileName):
-    returnValue = f"/stw-cgi/{fileName}?"
+def getUriFromJson(paramJson, uri):
+    returnValue = f"/stw-cgi/{uri}?"
     for item in json:
-        returnValue += item + "=" + str(json[item]) + "&"
+        returnValue += item + "=" + str(paramJson[item]) + "&"
     if returnValue[-1] == "&":
         returnValue = returnValue[:-1]
     return returnValue
-
-
-def getJsonFromWeb(webResult):
-    resJsonString = ""
-    for row in webResult.text.split("\r\n")[:-1]:
-        data = row.split("=")
-        resJsonString += f"\"{data[0]}\": \"{data[1]}\","
-    resJson = "{" + resJsonString[:-1] + "}"
-    resJson = json.loads(resJson)
-    return resJson
 
 
 def getRequest(url, isUseAuth=True, isStream=False):
@@ -73,8 +63,7 @@ def getHeatmapNumpy(paramJson={}):
             "msubmenu": "heatmap",
             "action": "check",
         }
-    res = getAPIbyJson(paramJson)
-    resJson = getJsonFromWeb(res)
+    resJson = getAPIbyJson(paramJson)
     jsonHeaders = [name for name in resJson]
     levels = [int(x) for x in resJson[jsonHeaders[0]].split(",")]
     heatmapResolution = [int(x) for x in resJson[jsonHeaders[2]].split("x")]
