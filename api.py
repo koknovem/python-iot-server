@@ -65,7 +65,7 @@ def getHeatmapNumpy(paramJson={}):
             "action": "check",
         }
     resJson, headers = getAPIbyJson(paramJson)
-    resJson = resJson[headers[0]]
+    resJson = resJson[headers[0]][0]
     print(resJson)
     jsonHeaders = [name for name in resJson]
     levels = resJson[jsonHeaders[0]]
