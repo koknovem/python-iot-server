@@ -11,7 +11,7 @@ def findNumpyDifference(anp, bnp):
 def main():
     for file in files:
         content = readFile(file)
-        print(content.amax())
+        print(content.tolist())
 
 if __name__ == "__main__":
     main()
