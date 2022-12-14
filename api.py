@@ -32,7 +32,7 @@ def postRequest(url, jsonBody, headers):
 
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi"):
     url = getUrlPath(paramJson, cgiFilename)
-    res = getRequest(url)
+    res = json.loads(getRequest(url))
     return res
 
 
