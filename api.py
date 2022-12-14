@@ -89,7 +89,7 @@ def getPeoplecount(paramJson={}):
             "msubmenu": "peoplecount",
             "action": "view",
         }
-    resJson, headers = getAPIbyJson(paramJson, isAcceptJson=False)
+    resJson, headers = getAPIbyJson(paramJson)
     # resJson = getJsonFromWeb(res)
     return resJson
 
