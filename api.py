@@ -31,7 +31,7 @@ def getJsonFromWeb(webResult):
 
 def getRequest(url, isUseAuth=True, isStream=False):
     if isUseAuth:
-        return requests.get(url, auth=auth, stream=isStream, headers={"accept": "application/json"})
+        return requests.get(url, auth=auth, stream=isStream, headers={"Accept": "application/json"})
     return requests.get(url)
 
 
