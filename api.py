@@ -73,9 +73,9 @@ def getHeatmapNumpy(paramJson={}):
     return [levelsNp, heatmapResolution]
 
 def getHeatmapHeatmapImage():
-    heatmapNumpy = getHeatmapNumpy()
+    heatmapNumpy, heatmapResolution = getHeatmapNumpy()
     heatmapImage = cv2.applyColorMap(heatmapNumpy, cv2.COLORMAP_JET)
-    return heatmapImage
+    return heatmapImage, heatmapResolution
 
 def getPeoplecount(paramJson={}):
     """
