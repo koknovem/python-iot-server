@@ -12,7 +12,7 @@ auth = HTTPDigestAuth('admin', 'A@dmin$2017')
 
 def getUriFromJson(paramJson, uri):
     returnValue = f"/stw-cgi/{uri}?"
-    for item in json:
+    for item in paramJson:
         returnValue += item + "=" + str(paramJson[item]) + "&"
     if returnValue[-1] == "&":
         returnValue = returnValue[:-1]
