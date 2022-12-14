@@ -9,9 +9,9 @@ def main():
     while True:
         heatmapNumpy = getHeatmapNumpy()
         heatmapshow = None
-        heatmapshow = cv2.normalize(heatmapNumpy/255, heatmapshow, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+        heatmapshow = cv2.normalize(heatmapNumpy, heatmapshow, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
         heatmapshow = cv2.applyColorMap(heatmapshow, cv2.COLORMAP_JET)
-        cv2.imshow("heatmap", heatmapshow)
+        cv2.imsave("heatmap", heatmapshow)
         time.sleep(1)
 
 
