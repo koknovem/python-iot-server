@@ -9,7 +9,7 @@ def main():
     while True:
         multiplier = 4
         heatmapImage, heatmapResolution = getHeatmapHeatmapImage()
-        heatmapImage = cv2.resize(heatmapImage, (heatmapResolution[0]*multiplier, heatmapResolution[0]*multiplier), interpolation=cv2.INTER_CUBIC)
+        heatmapImage = cv2.resize(heatmapImage, (heatmapResolution[0]*multiplier, heatmapResolution[1]*multiplier), interpolation=cv2.INTER_CUBIC)
         plt.imshow(heatmapImage)
         plt.show()
         # cv2.imshow("heatmap", heatmapImage)
