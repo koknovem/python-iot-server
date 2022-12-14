@@ -39,12 +39,6 @@ def postRequest(url, jsonBody, headers):
     return requests.post(url, json=jsonBody, headers=headers)
 
 
-def getDigestAuthHeaderContent():
-    authContent = ""
-
-    return authContent
-
-
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi"):
     url = baseUrl + getUriFromJson(paramJson, cgiFilename)
     res = getRequest(url)
@@ -116,7 +110,7 @@ def getObjectDetectFromImage(paramJson={}):
             "ObjectType": "Face"
         }
     url = getUrlPath(paramJson, "ai.cgi")
-    res = getRequest(url)
+    res = getAPIbyJson(url)
     return res
 
 def getThermalDetection(paramJson={}):
@@ -129,7 +123,7 @@ def getThermalDetection(paramJson={}):
             "action": "view",
         }
     url = getUrlPath(paramJson, "eventsources.cgi")
-    res = getRequest(url)
+    res = getAPIbyJson(url)
     return res
 
 
