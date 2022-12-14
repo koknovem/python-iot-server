@@ -7,7 +7,7 @@ import cv2
 
 def main():
     while True:
-        cv2.imshow("heatmap", getHeatmapHeatmapImage())
+        cv2.imshow("heatmap", getHeatmapHeatmapImage(2))
         cv2.waitKey(30)
 
 
