@@ -11,7 +11,7 @@ def main():
     for file in files:
         heatmap = readFile(file).tolist()
         diff = findNumpyDifference(firstHeatmap, heatmap)
-        print(diff.max())
+        print(firstHeatmap[6000], heatmap[6000])
 
 
 if __name__ == "__main__":
