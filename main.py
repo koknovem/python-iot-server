@@ -6,7 +6,7 @@ import cv2
 def main():
     while True:
         heatmapNumpy = getHeatmapNumpy()
-        cv2.imshow(heatmapNumpy, cv2.COLORMAP_JET)
+        cv2.imshow("heatmap", heatmapNumpy)
 
 
 if (__name__ == "__main__"):
