@@ -96,7 +96,7 @@ def getHeatmapNumpy(paramJson={}):
 def getHeatmapHeatmapImage():
     heatmapNumpy, heatmapResolution = getHeatmapNumpy()
     heatmapImage = cv2.applyColorMap(heatmapNumpy, cv2.COLORMAP_JET)
-    np.savetxt("heatmap/" + datetime.datetime.now().strftime("%H:%M:%S") + ".csv", heatmapNumpy, delimiter=",")
+    np.savetxt("heatmap/" + datetime.datetime.now().strftime("%H-%M-%S") + ".csv", heatmapNumpy, delimiter=",")
     return heatmapImage, heatmapResolution
 
 def getPeoplecount(paramJson={}):
