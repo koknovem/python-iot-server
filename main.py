@@ -11,7 +11,7 @@ def main():
         heatmapshow = None
         heatmapshow = cv2.normalize(heatmapNumpy, heatmapshow, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
         heatmapshow = cv2.applyColorMap(heatmapshow, cv2.COLORMAP_JET)
-        cv2.imsave("heatmap", heatmapshow)
+        cv2.imwrite("heatmap", heatmapshow)
         time.sleep(1)
 
 
