@@ -102,8 +102,8 @@ def getPeoplecount(paramJson={}):
             "action": "view",
         }
     res = getAPIbyJson(paramJson)
-    resJson = getJsonFromWeb(res)
-    return resJson
+    # resJson = getJsonFromWeb(res)
+    return res
 
 def getObjectDetectFromImage(paramJson={}):
     """
