@@ -87,9 +87,8 @@ def getHeatmapNumpy(paramJson=""):
     res = getAPIbyJson(paramJson)
     resJson = getJsonFromWeb(res)
     jsonHeaders = [name for name in resJson]
-    print(jsonHeaders)
-    levels = [int(x) for x in jsonHeaders[jsonHeaders[0]].split(",")]
-    heatmapResolution = [int(x) for x in jsonHeaders[jsonHeaders[2]].split("x")]
+    levels = [int(x) for x in resJson[jsonHeaders[0]].split(",")]
+    heatmapResolution = [int(x) for x in resJson[jsonHeaders[2]].split("x")]
     levelsNp = np.reshape(levels, heatmapResolution)
     img = cv2.applyColorMap(levelsNp, cv2.COLORMAP_HOT)
     cv2.imshow('heatmap', img)
