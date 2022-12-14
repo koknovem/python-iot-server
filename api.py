@@ -3,7 +3,6 @@ import requests
 from requests.auth import HTTPDigestAuth
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 host = "192.168.3.22"
@@ -86,8 +85,6 @@ def getHeatmapNumpy(paramJson=""):
     levels = [int(x) for x in resJson[jsonHeaders[0]].split(",")]
     heatmapResolution = [int(x) for x in resJson[jsonHeaders[2]].split("x")]
     levelsNp = np.reshape(levels, heatmapResolution).astype(np.uint8)
-    plt.imshow(levelsNp, cmap='hot', interpolation='nearest')
-    plt.show()
     return levelsNp
 
 

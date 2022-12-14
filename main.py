@@ -1,6 +1,12 @@
 from api import *
+import matplotlib.pyplot as plt
+import cv2
+
+
 def main():
-	getHeatmapNumpy()
+    while True:
+        heatmapNumpy = getHeatmapNumpy()
+        cv2.imshow(heatmapNumpy)
 
 
 if (__name__ == "__main__"):
