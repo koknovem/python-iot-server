@@ -9,6 +9,7 @@ def findNumpyDifference(anp, bnp):
 def main():
     firstHeatmap = readFile(files[0]).tolist()
     for file in files:
+        print(file)
         heatmap = readFile(file).tolist()
         diff = findNumpyDifference(firstHeatmap, heatmap)
         print(firstHeatmap[6000], heatmap[6000])
