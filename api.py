@@ -31,6 +31,15 @@ def getRequest(url, isUseAuth=True, isStream=False, isAcceptJson=True):
 def postRequest(url, jsonBody, headers):
     return requests.post(url, json=jsonBody, headers=headers)
 
+def getJsonFromWeb(webResult):
+    resJsonString = ""
+    for row in webResult.text.split("\r\n")[:-1]:
+        data = row.split("=")
+        resJsonString += f"\"{data[0]}\": \"{data[1]}\","
+    resJson = "{" + resJsonString[:-1] + "}"
+    resJson = json.loads(resJson)
+    return resJson
+
 
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi", isAcceptJson=True):
     url = getUrlPath(paramJson, cgiFilename)
@@ -39,7 +48,7 @@ def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi", isAcceptJson=True):
         resJson = json.loads(getRequest(url).text)
     else:
         res = getRequest(url, isAcceptJson=isAcceptJson).text
-        resJson = getWEB????
+        resJson = getJsonFromWeb(res)
     jsonHeader = [header for header in resJson]
     return [resJson, jsonHeader]
 
