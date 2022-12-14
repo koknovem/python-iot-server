@@ -9,7 +9,7 @@ def main():
     while True:
         heatmapNumpy = getHeatmapNumpy()
         heatmapNumpy = heatmapNumpy.astype('uint8')
-        cv2.imwrite("heatmap", heatmapNumpy)
+        cv2.imshow("heatmap", heatmapNumpy)
         time.sleep(1)
 
 
