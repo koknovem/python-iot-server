@@ -8,7 +8,7 @@ import cv2
 def main():
     while True:
         heatmapNumpy = getHeatmapNumpy()
-        print(heatmapNumpy, max(heatmapNumpy))
+        print(heatmapNumpy)
         cv2.imshow("heatmap", heatmapNumpy)
         time.sleep(1)
 
