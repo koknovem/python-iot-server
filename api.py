@@ -87,9 +87,8 @@ def getHeatmapNumpy(paramJson=""):
     levelsNp = np.reshape(levels, heatmapResolution).astype(np.uint8)
     return levelsNp
 
-def getHeatmapHeatmapImage(multiplier=1):
+def getHeatmapHeatmapImage():
     heatmapNumpy = getHeatmapNumpy()
-    heatmapNumpy = np.kron(heatmapNumpy, np.ones((multiplier, multiplier)))
     heatmapImage = cv2.applyColorMap(heatmapNumpy, cv2.COLORMAP_JET)
     return heatmapImage
 
