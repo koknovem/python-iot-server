@@ -6,15 +6,8 @@ import cv2
 
 
 def main():
-    while True:
-        heatmapNumpy = getHeatmapNumpy()
-        heatmapNumpy = np.kron(heatmapNumpy, np.ones((2,2))).astype(np.uint8)
-        for row in heatmapNumpy:
-            print(row)
-        grayImage = cv2.applyColorMap(heatmapNumpy, cv2.COLORMAP_JET)
-        cv2.imshow("heatmap", grayImage)
-        cv2.waitKey(30)
-        time.sleep(1)
+    cv2.imshow("heatmap", getHeatmapHeatmapImage())
+    cv2.waitKey(30)
 
 
 if (__name__ == "__main__"):

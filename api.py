@@ -87,6 +87,10 @@ def getHeatmapNumpy(paramJson=""):
     levelsNp = np.reshape(levels, heatmapResolution).astype(np.uint8)
     return levelsNp
 
+def getHeatmapHeatmapImage():
+    heatmapNumpy = getHeatmapNumpy()
+    heatmapImage = cv2.applyColorMap(heatmapNumpy, cv2.COLORMAP_JET)
+    return heatmapImage
 
 def getPeoplecount(paramJson=""):
     """
