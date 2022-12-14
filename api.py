@@ -115,9 +115,9 @@ def getObjectDetectFromImage(paramJson={}):
             "action": "control",
         }
     url = getUrlPath(paramJson, "ai.cgi")
-    res = requests.get(url, auth=auth, headers={"accept-type": "application/json"})
-    print(res.text)
-
+    res = getRequest(url)
+    print(url)
+    return res
 
 
 # Deprecated as this method is too fucking slow
