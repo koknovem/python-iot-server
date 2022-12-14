@@ -3,7 +3,7 @@ from os import listdir
 from os.path import isfile, join
 files = [f for f in listdir("heatmap/") if isfile(join("heatmap/", f))]
 def readFile(file):
-    return np.loadtxt(file)
+    return np.loadtxt("heatmap/" + file)
 def parseFmtToFloat(fmt):
     pass
 def findNumpyDifference(anp, bnp):
