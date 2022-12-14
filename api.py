@@ -113,6 +113,7 @@ def getObjectDetectFromImage(paramJson={}):
         paramJson = {
             "msubmenu": "objectdetectfromimage",
             "action": "control",
+            "ObjectType": "Face"
         }
     url = getUrlPath(paramJson, "ai.cgi")
     res = getRequest(url)
