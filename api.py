@@ -32,7 +32,6 @@ def postRequest(url, jsonBody, headers):
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi"):
     url = getUrlPath(paramJson, cgiFilename)
     res = json.loads(getRequest(url).text)
-    print(res)
     return res
 
 
@@ -66,8 +65,8 @@ def getHeatmapNumpy(paramJson={}):
         }
     resJson = getAPIbyJson(paramJson)
     jsonHeaders = [name for name in resJson]
-    levels = [print(x) for x in resJson[jsonHeaders[0]]]
-    heatmapResolution = [int(x) for x in resJson[jsonHeaders[2]].split("x")]
+    levels = resJson[jsonHeaders[0]]
+    heatmapResolution = resJson[jsonHeaders[2]].split("x")
     levelsNp = np.reshape(levels, heatmapResolution).astype(np.uint8)
     return levelsNp
 
