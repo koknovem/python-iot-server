@@ -6,7 +6,7 @@ import cv2
 
 
 def main():
-    print(getThermalDetection().text)
+    print(getPeoplecount().text)
     # while True:
     #     heatmapImage = getHeatmapHeatmapImage()
         # heatmapImage = cv2.resize(heatmapImage,(500,500) ,interpolation=cv2.INTER_CUBIC)
