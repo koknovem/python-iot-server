@@ -17,6 +17,7 @@ def main():
 
         cv2.imshow("heatmap", heatmapImage)
         cv2.waitKey(10)
+        time.sleep(10)
 
 
 if (__name__ == "__main__"):
