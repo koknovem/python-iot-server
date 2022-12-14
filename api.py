@@ -9,6 +9,8 @@ import cv2
 import numpy as np
 import io
 import PIL.Image
+import matplotlib.pyplot as plt
+
 
 host = "192.168.3.22"
 baseUrl = "http://" + host
@@ -90,9 +92,8 @@ def getHeatmapNumpy(paramJson=""):
     levels = [int(x) for x in resJson[jsonHeaders[0]].split(",")]
     heatmapResolution = [int(x) for x in resJson[jsonHeaders[2]].split("x")]
     levelsNp = np.reshape(levels, heatmapResolution).astype(np.uint8)
-    img = cv2.applyColorMap(levelsNp, cv2.COLORMAP_JET)
-    while True:
-        cv2.imshow('heatmap', img)
+    plt.imshow(levelsNp, cmap='hot', interpolation='nearest')
+    plt.show()
     return levelsNp
 
 

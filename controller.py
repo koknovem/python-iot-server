@@ -12,5 +12,5 @@ def peoplecount():
 
 @app.route("/heatmap")
 def heatmap():
-    return getHeatmap()
+    return getHeatmapNumpy()
 
