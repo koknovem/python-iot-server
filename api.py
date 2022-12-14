@@ -20,6 +20,7 @@ def getUriFromJson(paramJson, uri):
 
 
 def getRequest(url, isUseAuth=True, isStream=False):
+    print(url)
     if isUseAuth:
         return requests.get(url, auth=auth, stream=isStream, headers={"Accept": "application/json"})
     return requests.get(url)
