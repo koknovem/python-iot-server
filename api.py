@@ -31,8 +31,9 @@ def postRequest(url, jsonBody, headers):
 
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi"):
     url = getUrlPath(paramJson, cgiFilename)
-    res = json.loads(getRequest(url).text)
-    return res[0]
+    resJson = json.loads(getRequest(url).text)
+    jsonHeader = [header for header in resJson]
+    return [resJson, jsonHeader]
 
 
 def getUrlPath(paramJson, cgiFilename):
@@ -63,7 +64,8 @@ def getHeatmapNumpy(paramJson={}):
             "msubmenu": "heatmap",
             "action": "check",
         }
-    resJson = getAPIbyJson(paramJson)
+    resJson, headers = getAPIbyJson(paramJson)
+    resJson = resJson[headers[0]]
     jsonHeaders = [name for name in resJson]
     print(jsonHeaders)
     levels = resJson[jsonHeaders[0]]
@@ -85,9 +87,9 @@ def getPeoplecount(paramJson={}):
             "msubmenu": "peoplecount",
             "action": "view",
         }
-    res = getAPIbyJson(paramJson)
+    resJson, headers = getAPIbyJson(paramJson)
     # resJson = getJsonFromWeb(res)
-    return res
+    return resJson
 
 # TODO: Submenu Not Found
 def getObjectDetectFromImage(paramJson={}):
@@ -100,8 +102,8 @@ def getObjectDetectFromImage(paramJson={}):
             "action": "control",
             "ObjectType": "Face"
         }
-    res = getAPIbyJson(paramJson)
-    return res
+    resJson, headers = getAPIbyJson(paramJson)
+    return resJson
 
 def getThermalDetection(paramJson={}):
     """
@@ -113,8 +115,8 @@ def getThermalDetection(paramJson={}):
             "action": "view",
             "Channel": "0"
         }
-    res = getAPIbyJson(paramJson)
-    return res
+    resJson, headers = getAPIbyJson(paramJson)
+    return resJson
 
 
 # Deprecated as this method is too fucking slow
