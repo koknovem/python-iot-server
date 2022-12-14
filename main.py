@@ -6,7 +6,7 @@ import cv2
 
 
 def main():
-    print(getPeoplecount())
+    print(getObjectDetectFromImage())
     # while True:
     #     multiplier = 4
     #     heatmapImage, heatmapResolution = getHeatmapHeatmapImage()

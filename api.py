@@ -104,7 +104,7 @@ def getObjectDetectFromImage(paramJson={}):
             "action": "control",
             "ObjectType": "Face"
         }
-    resJson, headers = getAPIbyJson(paramJson)
+    resJson, headers = getAPIbyJson(paramJson, isAcceptJson=False)
     return resJson
 
 def getThermalDetection(paramJson={}):
