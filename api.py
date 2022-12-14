@@ -1,14 +1,8 @@
 import json
-import urllib.request
-import time
-from math import floor
-from urllib.request import urlopen
 import requests
 from requests.auth import HTTPDigestAuth
 import cv2
 import numpy as np
-import io
-import PIL.Image
 import matplotlib.pyplot as plt
 
 

@@ -2,6 +2,5 @@ requests
 flask
 numpy
 opencv-python
-hashlib
 pillow
 matplotlib
