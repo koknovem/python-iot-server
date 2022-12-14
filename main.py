@@ -16,6 +16,7 @@ def main():
         # plt.show()
 
         cv2.imshow("heatmap", heatmapImage)
+        cv2.waitKey(1)
         time.sleep(10)
 
 
