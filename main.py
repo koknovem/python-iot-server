@@ -8,7 +8,7 @@ import cv2
 def main():
     while True:
         heatmapNumpy = getHeatmapNumpy()
-        heatmapNumpy = heatmapNumpy
+        heatmapNumpy = np.kron(heatmapNumpy, np.ones((6, 6)))
         for row in heatmapNumpy:
             print(row)
         grayImage = cv2.cvtColor(heatmapNumpy, cv2.COLOR_GRAY2BGR)
