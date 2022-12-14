@@ -70,11 +70,11 @@ def resolveDigestData(json):
     }
 
 
-def getHeatmapNumpy(paramJson=""):
+def getHeatmapNumpy(paramJson={}):
     """
     Not a doc string, check the function name to understand what this does la you
     """
-    if (paramJson == ""):
+    if (paramJson == {}):
         paramJson = {
             "msubmenu": "heatmap",
             "action": "check",
@@ -92,11 +92,11 @@ def getHeatmapHeatmapImage():
     heatmapImage = cv2.applyColorMap(heatmapNumpy, cv2.COLORMAP_JET)
     return heatmapImage
 
-def getPeoplecount(paramJson=""):
+def getPeoplecount(paramJson={}):
     """
     Not a doc string, check the function name to understand what this does la you
     """
-    if (paramJson == ""):
+    if (paramJson == {}):
         paramJson = {
             "msubmenu": "peoplecount",
             "action": "view",
@@ -105,13 +105,27 @@ def getPeoplecount(paramJson=""):
     resJson = getJsonFromWeb(res)
     return resJson
 
-
-# Deprecated as this method is too fucking slow
-def showCameraStream(paramJson=""):
+def getObjectDetectFromImage(paramJson={}):
     """
     Not a doc string, check the function name to understand what this does la you
     """
-    if (paramJson == ""):
+    if (paramJson == {}):
+        paramJson = {
+            "msubmenu": "objectdetectfromimage",
+            "action": "control",
+        }
+    url = getUrlPath(paramJson, "ai.cgi")
+    res = requests.get(url, auth=auth, headers={"accept-type": "application/json"})
+    print(res.text)
+
+
+
+# Deprecated as this method is too fucking slow
+def showCameraStream(paramJson={}):
+    """
+    Not a doc string, check the function name to understand what this does la you
+    """
+    if (paramJson == {}):
         paramJson = {
             "msubmenu": "stream",
             "action": "view",
