@@ -90,7 +90,7 @@ def getHeatmapNumpy(paramJson=""):
     levels = [int(x) for x in resJson[jsonHeaders[0]].split(",")]
     heatmapResolution = [int(x) for x in resJson[jsonHeaders[2]].split("x")]
     levelsNp = np.reshape(levels, heatmapResolution).astype(np.uint8)
-    img = cv2.applyColorMap(np.kron(levelsNp, np.ones((10,10)))/255, cv2.COLORMAP_JET)
+    img = cv2.applyColorMap(levelsNp, cv2.COLORMAP_JET)
     cv2.imshow('heatmap', img)
     return levelsNp
 
