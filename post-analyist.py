@@ -4,14 +4,15 @@ from os.path import isfile, join
 files = [f for f in listdir("heatmap/") if isfile(join("heatmap/", f))]
 def readFile(file):
     return np.loadtxt("heatmap/" + file)
-def parseFmtToFloat(fmt):
-    pass
 def findNumpyDifference(anp, bnp):
-    pass
+    return np.subtract(anp, bnp)
 def main():
+    firstHeatmap = readFile(files[0]).tolist()
     for file in files:
-        content = readFile(file)
-        print(content.tolist())
+        heatmap = readFile(file).tolist()
+        diff = findNumpyDifference(firstHeatmap, heatmap)
+        print(diff)
+
 
 if __name__ == "__main__":
     main()
