@@ -15,7 +15,7 @@ def main():
         # plt.title(datetime.datetime.now().strftime("%H:%M:%S"))
         # plt.show()
 
-        cv2.putText(heatmapImage, datetime.datetime.now().strftime("%H:%M:%S"), (10, 500), 4, (255, 255, 255), 2, cv2.CV_AA)
+        cv2.putText(heatmapImage, datetime.datetime.now().strftime("%H:%M:%S"), (10, 500), 4, (255, 255, 255), 2)
         cv2.imshow("heatmap", heatmapImage)
         cv2.waitKey(1)
 
