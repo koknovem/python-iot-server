@@ -111,6 +111,7 @@ def getThermalDetection(paramJson={}):
         paramJson = {
             "msubmenu": "thermaldetectionmode",
             "action": "view",
+            "Channel": "0"
         }
     res = getAPIbyJson(paramJson)
     return res
