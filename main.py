@@ -11,7 +11,7 @@ def main():
         heatmapNumpy = np.kron(heatmapNumpy, np.ones((2,2))).astype(np.uint8)
         for row in heatmapNumpy:
             print(row)
-        grayImage = cv2.cvtColor(heatmapNumpy, cv2.COLOR_GRAY2BGR)
+        grayImage = cv2.cvtColor(heatmapNumpy, cv2.COLORMAP_JET)
         cv2.imshow("heatmap", grayImage)
         cv2.waitKey(30)
         time.sleep(1)
