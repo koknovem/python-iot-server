@@ -16,8 +16,7 @@ def main():
         # plt.show()
 
         cv2.imshow("heatmap", heatmapImage)
-        cv2.waitKey(1)
-        time.sleep(10)
+        cv2.waitKey(10)
 
 
 if (__name__ == "__main__"):
