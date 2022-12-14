@@ -75,7 +75,7 @@ def resolveDigestData(json):
     }
 
 
-def getHeatmap(paramJson=""):
+def getHeatmapNumpy(paramJson=""):
     """
     Not a doc string, check the function name to understand what this does la you
     """
@@ -86,7 +86,13 @@ def getHeatmap(paramJson=""):
         }
     res = getAPIbyJson(paramJson)
     resJson = getJsonFromWeb(res)
-    return resJson
+    jsonHeaders = [name for name in resJson]
+    levels = [int(x) for x in jsonHeaders[jsonHeaders[0]].split(",")]
+    heatmapResolution = [int(x) for x in jsonHeaders[jsonHeaders[2]].split("x")]
+    levelsNp = np.reshape(levels, heatmapResolution)
+    img = cv2.applyColorMap(levelsNp, cv2.COLORMAP_HOT)
+    cv2.imshow('heatmap', img)
+    return levelsNp
 
 
 def getPeoplecount(paramJson=""):
@@ -103,6 +109,7 @@ def getPeoplecount(paramJson=""):
     return resJson
 
 
+# Deprecated as this method is too fucking slow
 def showCameraStream(paramJson=""):
     """
     Not a doc string, check the function name to understand what this does la you
@@ -137,7 +144,6 @@ def showCameraStream(paramJson=""):
                         cv2.imshow('i', i)
                         if cv2.waitKey(1) == 27:
                             exit(0)
-                        print(len(imageNumpy), a, b)
                     buffer = b''
     except:
         showCameraStream()
@@ -149,15 +155,7 @@ def rtspStream():
     while True:
         ret, image = vidCap.read()
         if ret:
-            jsonHeaders = [name for name in getHeatmap()]
-            heatmapJson = getHeatmap()
-            levels = [int(x) for x in heatmapJson[jsonHeaders[0]].split(",")]
-            heatmapResolution = [int(x) for x in heatmapJson[jsonHeaders[2]].split("x")]
-            print(levels, heatmapResolution)
-            levelsNp = np.reshape(levels, heatmapResolution)
-            img = cv2.applyColorMap(levelsNp, cv2.COLORMAP_HOT)
-            cv2.imshow('image_display', img)
-            # cv2.imshow('image_display', image)
-            # cv2.waitKey(10)
+            cv2.imshow('image_display', image)
+            cv2.waitKey(10)
         else:
             break
