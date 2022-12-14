@@ -34,6 +34,7 @@ def postRequest(url, jsonBody, headers):
 def getJsonFromWeb(webResult):
     resJsonString = ""
     for row in webResult.text.split("\r\n")[:-1]:
+        print(row)
         data = row.split("=")
         resJsonString += f"\"{data[0]}\": \"{data[1]}\","
     resJson = "{" + resJsonString[:-1] + "}"
