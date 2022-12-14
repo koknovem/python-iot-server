@@ -9,7 +9,8 @@ def main():
     while True:
         heatmapNumpy = getHeatmapNumpy()
         heatmapNumpy = heatmapNumpy.astype('uint8')
-        cv2.imshow("heatmap", heatmapNumpy)
+        grayImage = cv2.cvtColor(heatmapNumpy, cv2.COLOR_GRAY2BGR)
+        cv2.imshow("heatmap", grayImage)
         time.sleep(1)
 
 
