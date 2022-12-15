@@ -196,7 +196,7 @@ def rtspStream():
     cv2.namedWindow('image_display', cv2.WINDOW_AUTOSIZE)
     out = cv2.VideoWriter(f"./video/{time.time()}.mp4",
                           cv2.VideoWriter_fourcc(*'mp4v'), 30, (1920, 1080))
-    while time.time()-startTime < 3000:
+    while True:
         ret, image = vidCap.read()
         if ret:
             out.write(image)

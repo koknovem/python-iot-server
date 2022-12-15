@@ -25,7 +25,7 @@ def main():
 
     # ^^^^^^^ show heatmap ^^^^^^^^ #
 
-    # rtspStream()
+    rtspStream()
 
 
 if (__name__ == "__main__"):
