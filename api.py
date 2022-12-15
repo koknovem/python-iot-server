@@ -7,7 +7,11 @@ import numpy as np
 
 
 host = "192.168.3.22"
+lightingHost = "192.168.3.218:8888"
+
 baseUrl = "http://" + host
+lightingUrl = "http://" + lightingHost
+
 auth = HTTPDigestAuth('admin', 'A@dmin$2017')
 
 
@@ -190,6 +194,18 @@ def rtspStream():
             cv2.waitKey(10)
         else:
             break
+
+def setLightLevel(group=31, level=20):
+    """
+    Not a doc string, check the function name to understand what this does la you
+    """
+    requestUrl = lightingUrl + "/group/{}/level/{}"
+    requestUrl = requestUrl.format(group, level)
+    res = getRequest(requestUrl)
+    if res.status_code == 200:
+        return True
+    return False
+
 
 def linearMapper(value, leftMin, leftMax, rightMin, rightMax):
     leftSpan = leftMax - leftMin
