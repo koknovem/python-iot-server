@@ -7,7 +7,11 @@ import cv2
 
 
 def main():
-    print(setLightLevel())
+    startTime = time.time()
+    print(setLightLevel(level=50), time.time() - startTime)
+    time.sleep(5)
+    startTime = time.time()
+    print(setLightLevel(level=20), time.time() - startTime)
     # while True:
     #     multiplier = 4
     #     heatmapImage, heatmapResolution = getHeatmapHeatmapImage()
