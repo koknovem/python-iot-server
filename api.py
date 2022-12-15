@@ -5,7 +5,6 @@ from requests.auth import HTTPDigestAuth
 import cv2
 import numpy as np
 
-
 host = "192.168.3.22"
 lightingHost = "192.168.3.218:8888"
 
@@ -26,7 +25,7 @@ def getUriFromJson(paramJson, uri):
 
 def getRequest(url, isUseAuth=True, isStream=False, isAcceptJson=True):
     header = {"Accept": "application/json"}
-    if(isAcceptJson == False):
+    if (isAcceptJson == False):
         header = {}
     if isUseAuth:
         return requests.get(url, auth=auth, stream=isStream, headers=header)
@@ -36,10 +35,11 @@ def getRequest(url, isUseAuth=True, isStream=False, isAcceptJson=True):
 def postRequest(url, jsonBody, headers):
     return requests.post(url, json=jsonBody, headers=headers)
 
+
 def getJsonFromWeb(webResult):
     resJsonString = ""
     for row in webResult.text.split("\r\n")[:-1]:
-        if(row == "NG"):
+        if (row == "NG"):
             return {"status": "error", "message": webResult.text}
         data = row.split("=")
         resJsonString += f"\"{data[0]}\": \"{data[1]}\","
@@ -51,7 +51,7 @@ def getJsonFromWeb(webResult):
 def getAPIbyJson(paramJson, cgiFilename="eventsources.cgi", isAcceptJson=True):
     url = getUrlPath(paramJson, cgiFilename)
     resJson = {}
-    if(isAcceptJson):
+    if (isAcceptJson):
         resJson = json.loads(getRequest(url).text)
     else:
         res = getRequest(url, isAcceptJson=isAcceptJson)
@@ -98,10 +98,12 @@ def getHeatmapNumpy(paramJson={}):
     levelsNp = np.reshape(levels, heatmapResolution).astype(np.uint8)
     return [levelsNp, heatmapResolution]
 
+
 def getHeatmapHeatmapImage():
     heatmapNumpy, heatmapResolution = getHeatmapNumpy()
     heatmapImage = cv2.applyColorMap(heatmapNumpy, cv2.COLORMAP_JET)
     return heatmapImage, heatmapResolution
+
 
 def getPeoplecount(paramJson={}):
     """
@@ -116,6 +118,7 @@ def getPeoplecount(paramJson={}):
     # resJson = getJsonFromWeb(res)
     return resJson
 
+
 # TODO: Submenu Not Found
 def getObjectDetectFromImage(paramJson={}):
     """
@@ -129,6 +132,7 @@ def getObjectDetectFromImage(paramJson={}):
         }
     resJson, headers = getAPIbyJson(paramJson, isAcceptJson=False)
     return resJson
+
 
 def getThermalDetection(paramJson={}):
     """
@@ -183,6 +187,7 @@ def showCameraStream(paramJson={}):
     except:
         showCameraStream()
 
+
 def rtspStream():
     vidCap = cv2.VideoCapture(f"rtsp://admin:A%40dmin%242017@{host}/H.264/media.smp")
     cv2.namedWindow('image_display', cv2.WINDOW_AUTOSIZE)
@@ -194,6 +199,7 @@ def rtspStream():
             cv2.waitKey(10)
         else:
             break
+
 
 def setLightLevel(group=31, level=20):
     """
