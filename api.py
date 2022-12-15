@@ -200,7 +200,6 @@ def rtspStream():
         ret, image = vidCap.read()
         if ret:
             out.write(image)
-            print(len(image[0]), len(image))
             cv2.imshow('image_display', image)
             cv2.waitKey(10)
         else:
