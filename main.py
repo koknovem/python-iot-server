@@ -7,7 +7,7 @@ import cv2
 
 
 def main():
-    print(setLightLevel(group=31, level=20))
+    # print(setLightLevel(group=31, level=20))
 
     # vvvvvvvvv show heatmap vvvvvvvvv #
 
@@ -24,6 +24,8 @@ def main():
     #     time.sleep(10)
 
     # ^^^^^^^ show heatmap ^^^^^^^^ #
+
+    rtspStream()
 
 
 if (__name__ == "__main__"):

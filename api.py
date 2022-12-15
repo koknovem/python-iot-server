@@ -1,5 +1,7 @@
 import datetime
 import json
+import time
+
 import requests
 from requests.auth import HTTPDigestAuth
 import cv2
@@ -189,12 +191,15 @@ def showCameraStream(paramJson={}):
 
 
 def rtspStream():
+    startTime = time.time()
     vidCap = cv2.VideoCapture(f"rtsp://admin:A%40dmin%242017@{host}/H.264/media.smp")
     cv2.namedWindow('image_display', cv2.WINDOW_AUTOSIZE)
-
-    while True:
+    out = cv2.VideoWriter(f"./video/{time.time()}.mp4",
+                          cv2.VideoWriter_fourcc(*'mp4v'), 30)
+    while time.time()-startTime < 3000:
         ret, image = vidCap.read()
         if ret:
+            out.write(image)
             cv2.imshow('image_display', image)
             cv2.waitKey(10)
         else:
