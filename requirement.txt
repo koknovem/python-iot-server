@@ -20,7 +20,7 @@ motmetrics
 filterpy
 h5py
 cython
-# cython_bbox
+cython_bbox
 # mod_wsgi
 
 
