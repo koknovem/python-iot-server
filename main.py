@@ -12,8 +12,8 @@ import os
 import sys
 sys.path.insert(1, './yolov7')
 
-from models.experimental import attempt_load
-from utils.datasets import letterbox
+from yolov7.models.experimental import attempt_load
+from yolov7.utils.datasets import letterbox
 
 import torch
 from torchvision import transforms
