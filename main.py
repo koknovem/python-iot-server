@@ -10,7 +10,7 @@ import time
 import logging
 import os
 import sys
-sys.path.insert(1, './yolov7')
+sys.path.insert(0, './yolov7')
 
 from yolov7.models.experimental import attempt_load
 from yolov7.utils.datasets import letterbox
