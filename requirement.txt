@@ -15,7 +15,7 @@ loguru
 scikit-image
 ninja
 tabulate
-lap
+lap>=0.4.0
 motmetrics
 filterpy
 h5py
@@ -48,3 +48,5 @@ thop  # FLOPs computation
 # albumentations>=1.0.3
 # pycocotools>=2.0  # COCO mAP
 # roboflow
+
+# Please also install Microsoft C++ Build Tools >= 14.0
