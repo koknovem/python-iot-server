@@ -192,18 +192,8 @@ def showCameraStream(paramJson={}):
 
 def rtspStream():
     startTime = time.time()
-    vidCap = cv2.VideoCapture(f"rtsp://admin:A%40dmin%242017@{host}/H.264/media.smp")
-    cv2.namedWindow('image_display', cv2.WINDOW_AUTOSIZE)
-    out = cv2.VideoWriter(f"./video/{time.time()}.mp4",
-                          cv2.VideoWriter_fourcc(*'mp4v'), 30, (1920, 1080))
-    while True:
-        ret, image = vidCap.read()
-        if ret:
-            out.write(image)
-            cv2.imshow('image_display', image)
-            cv2.waitKey(10)
-        else:
-            break
+    cap = cv2.VideoCapture(f"rtsp://admin:A%40dmin%242017@{host}/H.264/media.smp")
+    return cap
 
 
 def setLightLevel(group=31, level=20):
