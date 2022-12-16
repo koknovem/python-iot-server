@@ -20,7 +20,7 @@ motmetrics
 filterpy
 h5py
 cython
-cython_bbox
+# cython_bbox
 # mod_wsgi
 
 
@@ -49,4 +49,4 @@ thop  # FLOPs computation
 # pycocotools>=2.0  # COCO mAP
 # roboflow
 
-# Please also install Microsoft C++ Build Tools >= 14.0
+# Please also install Microsoft C++ Build Tools >= 14.0 for windows deployment
