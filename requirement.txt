@@ -21,7 +21,7 @@ filterpy
 h5py
 cython
 cython_bbox
-wsgi
+mod_wsgi
 
 
 # Logging -------------------------------------
