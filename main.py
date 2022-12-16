@@ -84,7 +84,7 @@ def draw_bboxes(img, tracker_ids, bboxes, scores, class_ids, track_id_dict, clas
         num_of_ppls = str(len(track_id_dict))
         cv2.putText(img, num_of_ppls, (10, 30), 1, 0.8, [0, 255, 0], thickness=tf)
 
-    return None
+    return img
 
 
 def main():
@@ -116,6 +116,11 @@ def main():
 
     # Get image width and height
     image_width, image_height = int(cap.get(3)), int(cap.get(4))
+
+    # Video Write
+    out = cv2.VideoWriter(f"./WSP_video_processed.mp4",
+                          cv2.VideoWriter_fourcc(*'mp4v'), 30,
+                          (image_width, image_height))
 
     # Initialize ByteTracker parameters
     tracker = MultiClassByteTrack(
@@ -166,7 +171,7 @@ def main():
                 track_id_dict[tracker_id] = new_id
 
         # Draw bboxes and extract videos
-        draw_bboxes(
+        img_bboxes = draw_bboxes(
             img_copy,
             t_ids,
             t_bboxes,
@@ -175,6 +180,7 @@ def main():
             track_id_dict,
             class_names
         )
+        out.write(img_bboxes)
 
     return None
 
