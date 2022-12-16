@@ -191,7 +191,7 @@ def showCameraStream(paramJson={}):
 
 
 def rtspStream():
-    startTime = time.time()
+    # startTime = time.time()
     cap = cv2.VideoCapture(f"rtsp://admin:A%40dmin%242017@{host}/H.264/media.smp")
     return cap
 
