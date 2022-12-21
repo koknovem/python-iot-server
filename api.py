@@ -7,7 +7,7 @@ from requests.auth import HTTPDigestAuth
 import cv2
 import numpy as np
 
-host = "192.168.3.22"
+host = "192.168.3.21"
 lightingHost = "192.168.3.218:8888"
 
 baseUrl = "http://" + host
