@@ -5,3 +5,4 @@
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/python-server.iml
 /.idea/vcs.xml
+*.pyc
