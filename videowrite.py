@@ -6,7 +6,7 @@ cap = rtspStream()
 image_width, image_height = int(cap.get(3)), int(cap.get(4))
 
 # Video Write
-out = cv2.VideoWriter(f"./WSP_raw_video.mp4",
+out = cv2.VideoWriter(f"./WSP_raw_video_2.mp4",
                       cv2.VideoWriter_fourcc(*'mp4v'), 30,
                       (image_width, image_height))
 
