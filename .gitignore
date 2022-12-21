@@ -6,3 +6,4 @@
 /.idea/python-server.iml
 /.idea/vcs.xml
 *.pyc
+/yolov7/video/
